@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketMaster", "MarketMaster\MarketMaster.csproj", "{EE28E847-910D-4EA5-BFCC-C449F3234156}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE28E847-910D-4EA5-BFCC-C449F3234156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE28E847-910D-4EA5-BFCC-C449F3234156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE28E847-910D-4EA5-BFCC-C449F3234156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE28E847-910D-4EA5-BFCC-C449F3234156}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30D605B4-D09F-4DD0-BFB6-D421EB0954DF}
+	EndGlobalSection
+EndGlobal
