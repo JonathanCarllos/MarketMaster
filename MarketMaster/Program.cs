@@ -16,8 +16,12 @@ builder.Services.AddDbContext<AppDbContext>(options => options
                 .AutoDetect(mySqlConnection)));
 
 
-builder.Services.AddTransient<ICategoriaRepository,CategoriaRepository>();
-builder.Services.AddTransient<IProdutoRepository,ProdutoRepository>();
+builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -33,8 +37,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

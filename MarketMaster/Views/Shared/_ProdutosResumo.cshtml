@@ -1,0 +1,8 @@
+﻿@model Produto
+
+<div class="col-sm-4 col-md-4 col-lg-4">
+    <p><img src="@Model.ImagemUrl" class="img-fluid"></p>
+    <h5 class="text-center">Preço : @Model.Preco.ToString("c")</h5>
+    <h4 class="text-center">@Model.Nome</h4>
+    <h6 class="text-center">@Model.Marca</h6>
+</div>

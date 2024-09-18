@@ -9,5 +9,6 @@ namespace MarketMaster.Context
 
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<CarrinhoCompra> CarrinhoCompras { get; set; }
     }
 }

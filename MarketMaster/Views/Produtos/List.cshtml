@@ -1,0 +1,19 @@
+﻿@model ProdutoListViewModel
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<div class="text-center">
+    <h1>@Model.CategoriaAtual</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var produtos in Model.Produtos)
+        {
+           <partial name="_ProdutosResumo" for=@produtos/>
+
+        }
+    </div>
+</div>
