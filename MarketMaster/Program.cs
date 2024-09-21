@@ -1,8 +1,8 @@
 using MarketMaster.Context;
+using MarketMaster.Models;
 using MarketMaster.Repository;
 using MarketMaster.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sp => CarrinhoAddCompra.GetCarrinho(sp));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
