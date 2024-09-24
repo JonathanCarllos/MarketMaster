@@ -14,6 +14,6 @@ namespace MarketMaster.Models
         [StringLength(500, ErrorMessage = "A descrição da categoria deve ter no máximo 500 caracteres.")]
         public string? Descricao { get; set; } // Descrição da categoria
 
-        public List<Categoria>? Categorias { get; set; } //relacionamento um para muitos
+        public virtual ICollection<Produto>? Produtos { get; set; } // Produtos que pertencem à categoria
     }
 }

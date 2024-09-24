@@ -41,9 +41,20 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "categoriaFiltro",
+        pattern: "Produtos/{action}/{categoria?}",
+        defaults: new { Controller = "Produtos", action = "List" }
+    );
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+
 
 app.Run();
