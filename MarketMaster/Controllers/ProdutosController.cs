@@ -29,15 +29,9 @@ namespace MarketMaster.Controllers
             }
             else
             {
+                produtos = _produtoRepository.Produtos.Where(p => p.Categoria.Nome.Equals(categoria)).OrderBy(c => c.Nome);
                 categoriaAtual = categoria;
 
-                produtos = categoria.ToLower() switch
-                {
-                    "celular" => _produtoRepository.Produtos.Where(l => l.Categoria.Nome.Equals("Celular")).OrderBy(l => l.Nome),
-                    "eletrodoméstico" => _produtoRepository.Produtos.Where(l => l.Categoria.Nome.Equals("Eletrodoméstico")).OrderBy(l => l.Nome),
-                    "informática e acessórios" => _produtoRepository.Produtos.Where(l => l.Categoria.Nome.Equals("Informática e Acessórios")).OrderBy(l => l.Nome),
-                    _ => _produtoRepository.Produtos.OrderBy(p => p.Id) 
-                };
             }
 
             var produtoVM = new ProdutoListViewModel
@@ -49,5 +43,10 @@ namespace MarketMaster.Controllers
             return View(produtoVM);
         }
 
+        public IActionResult Detail(int id)
+        {
+            var detalhes = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == id);
+            return View(detalhes);
+        }
     }
 }

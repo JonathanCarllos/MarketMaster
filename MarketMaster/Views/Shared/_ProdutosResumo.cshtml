@@ -4,12 +4,18 @@
     <div class="card h-100">
         <div class="card-body p-4">
             <p><img src="@Model.ImagemUrl" class="img-fluid"></p>
-            <div class="text-center">
-                <!-- Product name-->
+            <div class="text-center">            
                 <h4 class="text-center">@Model.Nome</h4>
-                <h6 class="text-center">@Model.Marca</h6>
-                <!-- Product price-->
+                <h6 class="text-center">@Model.Marca</h6>                
                 <h5 class="text-center">Preço : @Model.Preco.ToString("c")</h5>
+            </div>
+            <div class="text-center">
+                <p class="button">
+                    <a class="btn btn-primary" id="cartButton" asp-controller="CarrinhoCompra"
+                       asp-action="AdicionandoNoCarrinho" asp-route-ProdutoId="@Model.Id">
+                        Comprar
+                    </a>
+                </p>
             </div>
         </div>
     </div>

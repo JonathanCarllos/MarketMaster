@@ -6,13 +6,13 @@
 
 <div class="container">
     <div class="row">
-    <h3>Carrinho de Compra</h3>
-        <table class="table table-striped">
+        <h3>Carrinho de Compra</h3>
+        <table class="table table-success table-striped">
             <thead>
                 <tr>
-                    <th>Quantidade</th>
-                    <th>Produto</th>
-                    <th class="text-right">Preço</th>
+                    <th class="text-center">Quantidade</th>
+                    <th class="text-center">Produto</th>
+                    <th class="text-center">Preço</th>
                     <th class="text-right">Subtotal</th>
                     <th></th>
                 </tr>
@@ -22,9 +22,9 @@
                 {
                     <tr>
                         <td class="text-center">@item.Quantidade</td>
-                        <td class="text-center">@item.Produto</td>
-                        <td class="text-center">@item.Produto.Preco.ToString("c")</td>
-                        <td class="text-center">
+                        <td class="text-center">@item.Produto?.Nome</td>
+                        <td class="text-center">@item.Produto?.Preco.ToString("c")</td>
+                        <td class="text-right">
                             @((item.Quantidade * item.Produto.Preco).ToString("c"))
                         </td>
                         <td class="text-center">
@@ -33,22 +33,28 @@
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
-                        
+
                     </tr>
                 }
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="text-right">Total:</td>
+                    <td colspan="3" class="text-left"><strong>Total:</strong></td>
                     <td class="text-right">
-                        @Model.CarrinhoTotal.ToString("c")
+                        <strong>
+                            @Model.CarrinhoTotal.ToString("c")
+                        </strong>
                     </td>
-                </tr> 
+                </tr>
             </tfoot>
         </table>
-        <div class="btn-group">
-            <button type="button" asp-controller="Pedido" asp-action="Checkout" class="btn btn-warning">Encerrar Pedido</button>
-            <button type="button" asp-controller="Produtos" asp-action="List" class="btn btn-success">Continuar Comprando</button>
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-success" asp-controller="Pedido" asp-action="Checkout">Encerrar Pedido</a>
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-primary" asp-controller="Produtos" asp-action="List">Continuar Comprando</a>
+            </div>
         </div>
+        <br />
     </div>
 </div>
