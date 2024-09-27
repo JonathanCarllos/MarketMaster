@@ -43,7 +43,7 @@ namespace MarketMaster.Controllers
             return View(produtoVM);
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Details(int id)
         {
             var detalhes = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == id);
             return View(detalhes);

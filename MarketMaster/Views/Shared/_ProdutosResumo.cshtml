@@ -4,8 +4,11 @@
     <div class="card h-100">
         <div class="card-body p-4">
             <p><img src="@Model.ImagemUrl" class="img-fluid"></p>
-            <div class="text-center">            
-                <h4 class="text-center">@Model.Nome</h4>
+            <div class="text-center">  
+                <h4 class="text-center">
+                <a asp-controller="Produtos" asp-action="Details" asp-route-Id="@Model.Id">
+                @Model.Nome
+                </a></h4>
                 <h6 class="text-center">@Model.Marca</h6>                
                 <h5 class="text-center">Preço : @Model.Preco.ToString("c")</h5>
             </div>
