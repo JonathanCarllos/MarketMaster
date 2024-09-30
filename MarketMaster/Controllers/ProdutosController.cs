@@ -48,5 +48,31 @@ namespace MarketMaster.Controllers
             var detalhes = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == id);
             return View(detalhes);
         }
+
+        public ViewResult Search(string searchString)
+        {
+            IEnumerable<Produto> produtos;
+             string categoriaAtual = string.Empty;
+
+            if (string.IsNullOrEmpty(searchString)) 
+            {
+                produtos = _produtoRepository.Produtos.OrderBy(p => p.Id);
+                categoriaAtual = "Todos os produtos";
+            }
+            else
+            {
+                produtos = _produtoRepository.Produtos.Where(p => p.Nome.ToLower().Contains(searchString.ToLower()));
+
+                if (produtos.Any())
+                    categoriaAtual = "Produtos";
+                else
+                    categoriaAtual = "Nenhum produto foi encontrado.";
+            }
+            return View("~/Views/Produtos/List.cshtml", new ProdutoListViewModel
+            {
+                Produtos = produtos,
+                CategoriaAtual= categoriaAtual,
+            });
+        }
     }
 }
