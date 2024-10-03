@@ -4,10 +4,28 @@
     ViewData["Title"] = "Produtos";
 }
 
+<style>
+    .table-custom {
+        background-color: #006400; /* Verde para a tabela */
+        color: Black; /* Cor do texto */
+    }
+
+        .table-custom th {
+            background-color: #ffc107; /* Amarelo para o cabeçalho */
+            color: black; /* Cor do texto do cabeçalho */
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #004d00; /* Um tom mais escuro de verde para as linhas pares */
+        }
+</style>
+
+
 <div class="container">
     <div class="row">
         <h3>Carrinho de Compra <i class="bi-cart-fill me-1"></i></h3>
-        <table class="table table-light table-striped">
+        <table class="table table-light table-striped table-custom">
+            <!-- Adicione a classe aqui -->
             <thead>
                 <tr>
                     <th class="text-center">Quantidade</th>
@@ -33,7 +51,6 @@
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
-
                     </tr>
                 }
             </tbody>
