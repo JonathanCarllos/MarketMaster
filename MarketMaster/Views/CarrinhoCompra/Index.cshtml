@@ -28,8 +28,8 @@
                             @((item.Quantidade * item.Produto.Preco).ToString("c"))
                         </td>
                         <td class="text-center">
-                            <a asp-controller="CarrinhoCompra" asp-action="RemoveItemDoCarrinho"
-                               asp-route-produtoId="@item.Produto.Id" class="btn btn-danger">
+                            <a asp-controller="CarrinhoCompra" asp-action="RemoverItem"
+                               asp-route-ProdutoId="@item.Produto.Id" class="btn btn-danger">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>

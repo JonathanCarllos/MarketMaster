@@ -38,7 +38,7 @@ namespace MarketMaster.Controllers
             //verifica se existem itens de pedido
             if (_carrinhoCompra.CarrinhoCompraItems.Count == 0)
             {
-                ModelState.AddModelError("", "Seu carrinho esta vazio, que tal incluir um lanche...");
+                ModelState.AddModelError("", "Seu carrinho esta vazio");
             }
 
             //calcula o total de itens e o total do pedido
