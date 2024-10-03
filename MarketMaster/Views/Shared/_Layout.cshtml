@@ -10,52 +10,71 @@
     <meta name="generator" content="Hugo 0.122.0">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/carousel.css" asp-append-version="true" />   
+    <link rel="stylesheet" href="~/css/carousel.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/fontawesome.min.css" asp-append-version="true" />
-
-
-    <title>Carousel Template · Bootstrap v5.3</title>
-
+    <title>LOJAS BRASILEIRAS</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
-
-
-
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+        .navbar-custom {
+            background-color: #ffc107; /* Cor amarela */
+        }
 
+            .navbar-custom .nav-link {
+                color: #006400; /* Verde escuro */
+                font-weight: bold; /* Negrito */
+            }
 
-    <!-- Custom styles for this template -->
+                .navbar-custom .nav-link:hover {
+                    color: #004d00; /* Verde mais escuro ao passar o mouse */
+                }
+
+        .search-form {
+            width: 90%; /* Ocupará 80% da tela */
+            max-width: 900px; /* Definir uma largura máxima */
+        }
+    </style>
+
 </head>
-<body>   
-
+<body>
     <header data-bs-theme="dark">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <nav class="navbar navbar-expand-md navbar-custom fixed-top">
             <div class="container-fluid">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="logo" width="50" height="50" /></a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo_lojasbrasileiras.png" alt="logo" width="250" height="40" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+                    <form class="d-flex mx-auto search-form" role="search" asp-controller="Produtos" asp-action="Search" method="get">
+                        <input class="form-control me-2 w-100" type="search" placeholder="Pesquisar" aria-label="Search" name="searchString">
+                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+
+                </div>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                    <ul class="navbar-nav mb-2 mb-md-0 ms-auto">
                         <li class="nav-item">
                             @await Component.InvokeAsync("CategoriaMenu")
                         </li>
-                        <form class="d-flex">
-                            @await Component.InvokeAsync("CarrinhoDeCompra")
-                        </form>
+                        &nbsp; &nbsp;
+                        <li class="nav-item">
+                            <form class="d-flex">
+                                @await Component.InvokeAsync("CarrinhoDeCompra")
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
                     </ul>
-                    <form class="d-flex" role="search" asp-controller="Produtos" asp-action="Search" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" name="searchString">
-                        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
-                    </form>
                 </div>
             </div>
         </nav>
     </header>
+
     <br />
     <br />
     <div class="container">
@@ -64,7 +83,6 @@
         </main>
     </div>
 
-    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,11 +1,33 @@
 ﻿@model CarrinhoCompraViewModel;
 
+<style>
+    .dropdown .btn-secondary {
+        background-color: #004d00; /* Cor verde escuro */
+        border-color: #004d00; /* Mesma cor para a borda */
+    }
+
+        .dropdown .btn-secondary:hover,
+        .dropdown .btn-secondary:focus {
+            background-color: #003a00; /* Cor mais escura ao passar o mouse */
+            border-color: #003a00;
+        }
+
+    .dropdown-menu a {
+        color: black; /* Links dentro do dropdown em preto */
+    }
+
+        .dropdown-menu a:hover {
+            background-color: #e9ecef; /* Cor de fundo ao passar o mouse nos itens */
+        }
+
+</style>
+
 @if (Model.CarrinhoCompra.CarrinhoCompraItems.Count > 0)
 {
     <button class="btn btn-outline-dark" type="submit">
         <i class="bi-cart-fill me-1"></i>
         <a asp-controller="CarrinhoCompra" asp-action="Index">
-            <span style="color:wheat"><i class="fa-solid fa-cart-shopping"></i></span>
+            <span style="color: #004d00;"><i class="fa-solid fa-cart-plus"></i></span>
             <span class="badge bg-dark text-white ms-1 rounded-pill">@Model.CarrinhoCompra.CarrinhoCompraItems.Count</span>
         </a>
     </button>
