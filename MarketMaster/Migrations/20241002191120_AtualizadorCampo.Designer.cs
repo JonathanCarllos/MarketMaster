@@ -4,6 +4,7 @@ using MarketMaster.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketMaster.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241002191120_AtualizadorCampo")]
+    partial class AtualizadorCampo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,26 +25,25 @@ namespace MarketMaster.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("MarketMaster.Models.CarrinhoCompraItem", b =>
+            modelBuilder.Entity("MarketMaster.Models.CarrinhoCompra", b =>
                 {
-                    b.Property<int>("CarrinhoCompraItemId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CarrinhoCompraItemId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CarrinhoCompraId")
-                        .IsRequired()
+                    b.Property<string>("CarrinhoId")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<int>("ProdutoId")
+                    b.Property<int?>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("CarrinhoCompraItemId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ProdutoId");
 
@@ -163,7 +165,7 @@ namespace MarketMaster.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("PedidoDetalhe");
+                    b.ToTable("PedidoDetalhes");
                 });
 
             modelBuilder.Entity("MarketMaster.Models.Produto", b =>
@@ -241,13 +243,11 @@ namespace MarketMaster.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("MarketMaster.Models.CarrinhoCompraItem", b =>
+            modelBuilder.Entity("MarketMaster.Models.CarrinhoCompra", b =>
                 {
                     b.HasOne("MarketMaster.Models.Produto", "Produto")
                         .WithMany()
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProdutoId");
 
                     b.Navigation("Produto");
                 });

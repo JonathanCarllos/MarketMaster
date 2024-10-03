@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.CarrinhoAddCompra.carrinhoCompras)
+                @foreach (var item in Model.CarrinhoCompra.CarrinhoCompraItems)
                 {
                     <tr>
                         <td class="text-center">@item.Quantidade</td>
@@ -42,7 +42,7 @@
                     <td colspan="4" class="text-right"><strong>Total:</strong></td>
                     <td class="text-right">
                         <strong>
-                            @Model.CarrinhoTotal.ToString("c")
+                            @Model.CarrinhoCompraTotal.ToString("c")
                         </strong>
                     </td>
                 </tr>

@@ -6,36 +6,36 @@ namespace MarketMaster.Repository
 {
     public class PedidoRepository : IPerdidoRepository
     {
-        private readonly AppDbContext _context;
-        private readonly CarrinhoAddCompra _carrinhoCompra;
+        private readonly AppDbContext _appDbContext;
+        private readonly CarrinhoCompra _carrinhoCompra;
 
-        public PedidoRepository(AppDbContext context, CarrinhoAddCompra carrinhoCompra)
+        public PedidoRepository(AppDbContext appDbContext, CarrinhoCompra carrinhoCompra)
         {
-            _context = context;
+            _appDbContext = appDbContext;
             _carrinhoCompra = carrinhoCompra;
         }
 
         public void CriarPedido(Pedido pedido)
         {
             pedido.PedidoEnviado = DateTime.Now;
-            _context.Pedidos.Add(pedido);
-            _context.SaveChanges();
+            _appDbContext.Pedidos.Add(pedido);
+            _appDbContext.SaveChanges();
 
-            var carrinhoDeCompras = _carrinhoCompra.carrinhoCompras;
+            var carrinhoCompraItens = _carrinhoCompra.CarrinhoCompraItems;
 
-            foreach (var item in carrinhoDeCompras) 
+            foreach (var carrinhoItens in carrinhoCompraItens)
             {
-                var pedidoDetalhado = new PedidoDetalhe()
+                var pedidoDetail = new PedidoDetalhe()
                 {
-                    Quantidade = item.Quantidade,
-                    ProdutoId = item.Id,
+                    Quantidade = carrinhoItens.Quantidade,
+                    ProdutoId = carrinhoItens.Produto.Id,
                     PedidoId = pedido.PedidoId,
-                    Preco = item.Produto.Preco
+                    Preco = carrinhoItens.Produto.Preco
                 };
-
-                _context.PedidoDetalhes.Add(pedidoDetalhado);
+                _appDbContext.PedidoDetalhe.Add(pedidoDetail);
             }
-            _context.SaveChanges();
+            _appDbContext.SaveChanges();
         }
     }
 }
+

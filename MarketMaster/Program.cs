@@ -22,7 +22,7 @@ builder.Services.AddTransient<IPerdidoRepository, PedidoRepository>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped(sp => CarrinhoAddCompra.GetCarrinho(sp));
+builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();

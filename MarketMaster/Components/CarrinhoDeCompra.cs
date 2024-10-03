@@ -7,25 +7,24 @@ namespace MarketMaster.Components
 {
     public class CarrinhoDeCompra : ViewComponent
     {
-        public readonly CarrinhoAddCompra _carrinhoAddCompra;
+        private readonly CarrinhoCompra _carrinhoCompra;
 
-        public CarrinhoDeCompra(CarrinhoAddCompra carrinhoAddCompra)
+        public CarrinhoDeCompra(CarrinhoCompra carrinhoCompra)
         {
-            _carrinhoAddCompra = carrinhoAddCompra;
+            _carrinhoCompra = carrinhoCompra;
         }
 
         public IViewComponentResult Invoke()
         {
-            var carrinho = _carrinhoAddCompra.GetCarrinhoCompras();
-            _carrinhoAddCompra.carrinhoCompras = carrinho;
+            var itens = _carrinhoCompra.GetCompraItems();
+            _carrinhoCompra.CarrinhoCompraItems = itens;
 
-            var carrinhoVM = new CarrinhoCompraViewModel
+            var carrinhoCompraVM = new CarrinhoCompraViewModel
             {
-                CarrinhoAddCompra = _carrinhoAddCompra,
-                CarrinhoTotal = _carrinhoAddCompra.Somar()
+                CarrinhoCompra = _carrinhoCompra,
+                CarrinhoCompraTotal = _carrinhoCompra.GetCarrinhoCompraTotal()
             };
-
-            return View(carrinhoVM);
+            return View(carrinhoCompraVM);
         }
     }
 }

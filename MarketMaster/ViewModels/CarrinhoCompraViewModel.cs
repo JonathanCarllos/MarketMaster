@@ -4,8 +4,8 @@ namespace MarketMaster.ViewModels
 {
     public class CarrinhoCompraViewModel
     {
-        public CarrinhoAddCompra? CarrinhoAddCompra { get; set; }
-        public decimal CarrinhoTotal { get; set; }
+        public CarrinhoCompra CarrinhoCompra { get; set; }
+        public decimal CarrinhoCompraTotal { get; set; }
 
     }
 }

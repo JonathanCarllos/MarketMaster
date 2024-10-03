@@ -1,12 +1,12 @@
 ﻿@model CarrinhoCompraViewModel;
 
-@if (Model.CarrinhoAddCompra.carrinhoCompras.Count > 0)
+@if (Model.CarrinhoCompra.CarrinhoCompraItems.Count > 0)
 {
     <button class="btn btn-outline-dark" type="submit">
         <i class="bi-cart-fill me-1"></i>
         <a asp-controller="CarrinhoCompra" asp-action="Index">
             <span style="color:wheat"><i class="fa-solid fa-cart-shopping"></i></span>
-            <span class="badge bg-dark text-white ms-1 rounded-pill">@Model.CarrinhoAddCompra.carrinhoCompras.Count</span>
+            <span class="badge bg-dark text-white ms-1 rounded-pill">@Model.CarrinhoCompra.CarrinhoCompraItems.Count</span>
         </a>
     </button>
 }

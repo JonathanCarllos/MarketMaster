@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MarketMaster.Models
 {
@@ -22,7 +23,7 @@ namespace MarketMaster.Models
         public string? Modelo { get; set; } // Modelo do produto
 
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Preco { get; set; } // Preço do produto
 
         [Range(0.01, double.MaxValue, ErrorMessage = "O custo deve ser maior que zero.")]

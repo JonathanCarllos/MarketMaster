@@ -1,6 +1,7 @@
 ﻿using MarketMaster.Models;
 using MarketMaster.Repository.Interfaces;
 using MarketMaster.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketMaster.Controllers
@@ -8,51 +9,48 @@ namespace MarketMaster.Controllers
     public class CarrinhoCompraController : Controller
     {
         private readonly IProdutoRepository _produtoRepository;
-        private readonly CarrinhoAddCompra _carrinhoAddCompra;
+        private readonly CarrinhoCompra _carrinhoCompra;
 
-        public CarrinhoCompraController(IProdutoRepository produtoRepository, CarrinhoAddCompra carrinhoAddCompra)
+        public CarrinhoCompraController(IProdutoRepository produtoRepository, CarrinhoCompra carrinhoCompra)
         {
             _produtoRepository = produtoRepository;
-            _carrinhoAddCompra = carrinhoAddCompra;
+            _carrinhoCompra = carrinhoCompra;
         }
 
         public IActionResult Index()
         {
-            var carrinho = _carrinhoAddCompra.GetCarrinhoCompras();
-            _carrinhoAddCompra.carrinhoCompras = carrinho;
+            var itens = _carrinhoCompra.GetCompraItems();
+            _carrinhoCompra.CarrinhoCompraItems = itens;
 
-            var carrinhoVM = new CarrinhoCompraViewModel
+            var carrinhoCompraVM = new CarrinhoCompraViewModel
             {
-                CarrinhoAddCompra = _carrinhoAddCompra,
-                CarrinhoTotal = _carrinhoAddCompra.Somar()
+                CarrinhoCompra = _carrinhoCompra,
+                CarrinhoCompraTotal = _carrinhoCompra.GetCarrinhoCompraTotal()
             };
-
-            return View(carrinhoVM);
+            return View(carrinhoCompraVM);
         }
 
-        public RedirectToActionResult AdicionandoNoCarrinho(int ProdutoId)
+        //[Authorize]
+        public IActionResult AdicionarItem(int produtoId)
         {
-            var produtoSelecionado = _produtoRepository.Produtos.FirstOrDefault(
-                p => p.Id == ProdutoId
-            );
+            var produtoselecionado = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == produtoId);
 
-            if (produtoSelecionado != null)
+            if (produtoselecionado != null)
             {
-                _carrinhoAddCompra.AdicionandoAoCarrinho(produtoSelecionado);
+                _carrinhoCompra.AdicionarAoCarrinho(produtoselecionado);
             }
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveItemDoCarrinho(int ProdutoId)
+        //[Authorize]
+        public IActionResult RemoverItem(int produtoId)
         {
-            var produtoSelecionado = _produtoRepository.Produtos.FirstOrDefault(
-               p => p.Id == ProdutoId
-            );
+            var produtoselecionado = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == produtoId);
 
-            if(produtoSelecionado != null)
+            if (produtoselecionado != null)
             {
-                _carrinhoAddCompra.RemoverDoCarrinho(produtoSelecionado);
+                _carrinhoCompra.RemoverDoCarrinho(produtoselecionado);
             }
 
             return RedirectToAction("Index");
