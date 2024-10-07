@@ -2,6 +2,7 @@ using MarketMaster.Context;
 using MarketMaster.Models;
 using MarketMaster.Repository;
 using MarketMaster.Repository.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,20 @@ builder.Services.AddSession();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequiredLength = 8;
+    options.Password.RequiredUniqueChars = 2;
+    options.Password.RequireNonAlphanumeric = false;
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option => {
+        option.Cookie.Name = "AspNetCore.Cookie";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        option.SlidingExpiration = true;
+    });
 
 var app = builder.Build();
 
