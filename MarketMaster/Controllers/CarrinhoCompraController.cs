@@ -30,7 +30,7 @@ namespace MarketMaster.Controllers
             return View(carrinhoCompraVM);
         }
 
-        //[Authorize]
+        [Authorize]
         public IActionResult AdicionarItem(int produtoId)
         {
             var produtoselecionado = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == produtoId);
@@ -43,7 +43,7 @@ namespace MarketMaster.Controllers
             return RedirectToAction("Index");
         }
 
-        //[Authorize]
+        [Authorize]
         public IActionResult RemoverItem(int produtoId)
         {
             var produtoselecionado = _produtoRepository.Produtos.FirstOrDefault(p => p.Id == produtoId);

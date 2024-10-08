@@ -2,6 +2,7 @@ using MarketMaster.Context;
 using MarketMaster.Models;
 using MarketMaster.Repository;
 using MarketMaster.Repository.Interfaces;
+using MarketMaster.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -40,11 +41,14 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(option => {
+    .AddCookie(option =>
+    {
         option.Cookie.Name = "AspNetCore.Cookie";
         option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
         option.SlidingExpiration = true;
     });
+
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 
 var app = builder.Build();
 
@@ -60,6 +64,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+await CriarPerfisUsuariosAsync(app);
+
 app.UseSession();
 
 app.UseAuthentication();
@@ -79,6 +86,16 @@ app.UseEndpoints(endpoints =>
     );
 });
 
-
-
 app.Run();
+
+async Task CriarPerfisUsuariosAsync(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (var scope = scopedFactory?.CreateScope())
+    {
+        var service = scope?.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        await service.SeedRolesAsync();
+        await service.SeedUserAsync();
+    }
+}
