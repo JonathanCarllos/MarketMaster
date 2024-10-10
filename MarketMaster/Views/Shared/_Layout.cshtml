@@ -43,7 +43,7 @@
 </head>
 <body>
     <header data-bs-theme="dark">
-      
+
         <nav class="navbar navbar-expand-md navbar-custom fixed-top">
             <div class="container-fluid">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
@@ -67,6 +67,7 @@
                                 @await Component.InvokeAsync("CarrinhoDeCompra")
                             </form>
                         </li>
+                      <partial name="_LoginAdmin.cshtml"/>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>&nbspHome</a>
                         </li>

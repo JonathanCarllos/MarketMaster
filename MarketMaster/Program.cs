@@ -72,8 +72,14 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute(
+           name: "areas",
+           pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+         );
+
     endpoints.MapControllerRoute(
         name: "categoriaFiltro",
         pattern: "Produtos/{action}/{categoria?}",
