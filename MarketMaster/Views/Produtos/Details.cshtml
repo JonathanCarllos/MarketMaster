@@ -2,43 +2,67 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6">
-            <div id="carouselCard" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="@Model.ImagemThumblenailUrl" class="img-fluid" alt="Slide 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="@Model.ImagemUrl" class="img-fluid"  alt="Slide 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="image3.jpg" class="img-fluid" alt="Slide 3">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCard" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselCard" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+        <!-- Seção da Imagem -->
+        <div class="col-md-6 text-center">
+            <img src="@Model.ImagemUrl" class="img-fluid shadow-lg rounded" alt="@Model.Nome" style="max-height: 400px;">
         </div>
 
+        <!-- Seção de Detalhes do Produto -->
         <div class="col-md-6">
-            <div class="card-body">
-                <h2 class="card-title">@Model.Nome</h2>
-                <h5>@Model.Marca</h5>
-                <p class="card-text" style="text-align:justify">@Model.Descricao</p>
-                <p>Preço: @Model.Preco.ToString("c")</p>                
-                <p class="button">
-                    <a class="btn btn-primary" id="cartButton" asp-controller="CarrinhoCompra"
+            <div class="product-details">
+                <h2 class="mb-3">@Model.Nome</h2>
+                <h5 class="text-muted mb-4">@Model.Marca</h5>
+                <p class="text-justify mb-4">@Model.Descricao</p>
+
+                <div class="price-section mb-4">
+                    <h4 class="text-success">Preço: @Model.Preco.ToString("c")</h4>
+                </div>
+
+                <div class="action-buttons">
+                    <a class="btn btn-lg btn-success mb-2" id="cartButton" asp-controller="CarrinhoCompra"
                        asp-action="AdicionarItem" asp-route-ProdutoId="@Model.Id">
                         Adicionar ao Carrinho
                     </a>
-                </p>
+                    <a class="btn btn-lg btn-outline-info mb-2" asp-controller="Produtos" asp-action="List">
+                        Voltar aos Produtos
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .product-details h2 {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .product-details h5 {
+        color: #6c757d;
+    }
+
+    .product-details p {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .price-section h4 {
+        font-weight: bold;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .action-buttons .btn-outline-info {
+        margin-top: 10px;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+</style>
