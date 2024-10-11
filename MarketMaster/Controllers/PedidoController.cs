@@ -54,7 +54,7 @@ namespace MarketMaster.Controllers
             {               
                 _pedidoRepository.CriarPedido(pedido);
                
-                ViewBag.CheckoutCompletoMensagem = "Obrigado pelo seu pedido :)";
+                ViewBag.CheckoutCompletoMensagem = "Obrigado pelo seu pedido";
                 ViewBag.TotalPedido = _carrinhoCompra.GetCarrinhoCompraTotal();
                
                 _carrinhoCompra.LimparCarrinho();

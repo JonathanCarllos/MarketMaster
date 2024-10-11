@@ -1,41 +1,47 @@
 ﻿@model Pedido
 
-<div class="container">
+<div class="container my-5">
 
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
         <h2>@ViewBag.CheckoutCompletoMensagem</h2>
     </div>
 
-    <div class="card">
+    <div class="card shadow-lg">
         <div class="card-body">
-            <p>Cliente : <strong>@Model.Nome</strong>
-            <p>Data do Pedido :  <strong>@Model.PedidoEnviado</strong>
-            <p>Número do Pedido   : <strong>@Model.PedidoId</strong></p>
+            <h5 class="card-title">Detalhes do Pedido</h5>
+            <p><strong>Cliente:</strong> @Model.Nome</p>
+            <p><strong>Data do Pedido:</strong> @Model.PedidoEnviado</p>
+            <p><strong>Número do Pedido:</strong> @Model.PedidoId</p>
 
-            <table class="table">
-                <tr>
-                    <th></th>
-                    <th>Quantidade</th>
-                    <th>Lanche</th>
-                    <th>Preço</th>
-                </tr>
-                        @foreach (var item in Model.PedidoItens)
-                        {
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td><img src="@item.Produto.ImagemUrl" width="40" height="40" /></td>
-                        <td>@item.Quantidade</td>
-                        <td>@item.Produto.Nome</td>
-                        <td>@item.Produto.Preco</td>
+                        <th></th>
+                        <th>Quantidade</th>
+                        <th>Produto</th>
+                        <th>Preço</th>
                     </tr>
-                        }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PedidoItens)
+                    {
+                        <tr>
+                            <td><img src="@item.Produto.ImagemUrl" class="img-fluid" style="width: 40px; height: 40px;" /></td>
+                            <td>@item.Quantidade</td>
+                            <td>@item.Produto.Nome</td>
+                            <td>@item.Produto.Preco.ToString("C2")</td>
+                        </tr>
+                    }
+                </tbody>
             </table>
 
-            <h4>Valor Total do Pedido: <strong>@(((decimal)ViewBag.TotalPedido).ToString("C2"))</strong></h4>
+            <h4 class="mt-4">Valor Total do Pedido: <strong>@(((decimal)ViewBag.TotalPedido).ToString("C2"))</strong></h4>
         </div>
     </div>
-</div>
-<div class="form-group" style="text-align :center">
-    <h3>
-        <a class="nav-link text-info" asp-controller="Home" asp-action="Index">Retornar</a>
-    </h3>
+
+    <div class="text-center mt-4">
+        <h3>
+            <a class="nav-link text-light btn btn-secondary" asp-controller="Home" asp-action="Index">Retornar</a>
+        </h3>
+    </div>
 </div>

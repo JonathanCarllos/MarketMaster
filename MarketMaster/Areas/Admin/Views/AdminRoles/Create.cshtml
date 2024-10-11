@@ -1,0 +1,19 @@
+﻿@model string
+<br />
+<div class="alert alert-primary" role="alert">
+    <div class="text-center">
+        <h3>
+            Criar Role
+        </h3>
+    </div>
+</div>
+<a asp-action="Index" class="btn btn-primary"><i class="fa-solid fa-circle-left"></i> Retornar a lista</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="name">Nome:</label>
+        <input name="name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2"> <i class="fa-solid fa-plus"></i> Criar</button>
+</form>
