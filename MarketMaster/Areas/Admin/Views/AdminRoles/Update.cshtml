@@ -1,54 +1,77 @@
 ﻿@model RoleEdit
+
 <br />
 <div class="alert alert-primary" role="alert">
     <h4>Atualizar Role</h4>
 </div>
-<a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Retornar</a>
+
+<a asp-action="Index" class="btn btn-secondary mb-3">
+    <i class="fa-solid fa-circle-left"></i> Retornar
+</a>
+
 <div asp-validation-summary="All" class="text-danger"></div>
+
 <form method="post">
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
     <input type="hidden" name="roleId" value="@Model.Role.Id" />
-    <div class="alert alert-primary" role="alert">
-        <h4>Incluir na Role : @Model.Role.Name</h4>
-    </div>   
-    <table class="table table-bordered table-sm">
-        @if (Model.NonMembers.Count() == 0)
-        {
-            <tr><td colspan="2">Todos os usuários pertecem a esta role</td></tr>
-        }
-        else
-        {
-            @foreach (IdentityUser user in Model.NonMembers)
+
+    <fieldset class="border p-3">
+        <legend class="alert alert-primary">
+            Incluir na Role: @Model.Role.Name
+        </legend>
+
+        <table class="table table-bordered table-sm">
+            @if (Model.NonMembers.Count() == 0)
             {
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>
-                        <input type="checkbox" name="AddIds" value="@user.Id">
-                    </td>
+                    <td colspan="2">Todos os usuários pertencem a esta role</td>
                 </tr>
             }
-        }
-    </table>
-    <div class="alert alert-danger" role="alert">
-        <h4>Remover da Role : @Model.Role.Name</h4>
-    </div>    
-    <table class="table table-bordered table-sm">
-        @if (Model.Members.Count() == 0)
-        {
-            <tr><td colspan="2">Não existem usuários nesta Role</td></tr>
-        }
-        else
-        {
-            @foreach (IdentityUser user in Model.Members)
+            else
+            {
+                @foreach (IdentityUser user in Model.NonMembers)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" id="add-@user.Id" name="AddIds" value="@user.Id" />
+                            <label for="add-@user.Id">Incluir</label>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </fieldset>
+
+    <fieldset class="border p-3 mt-3">
+        <legend class="alert alert-danger">
+            Remover da Role: @Model.Role.Name
+        </legend>
+
+        <table class="table table-bordered table-sm">
+            @if (Model.Members.Count() == 0)
             {
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>
-                        <input type="checkbox" name="DeleteIds" value="@user.Id">
-                    </td>
+                    <td colspan="2">Não existem usuários nesta Role</td>
                 </tr>
             }
-        }
-    </table>
-    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+            else
+            {
+                @foreach (IdentityUser user in Model.Members)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" id="remove-@user.Id" name="DeleteIds" value="@user.Id" />
+                            <label for="remove-@user.Id">Remover</label>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary mt-3">
+        <i class="fa-solid fa-floppy-disk"></i> Salvar
+    </button>
 </form>

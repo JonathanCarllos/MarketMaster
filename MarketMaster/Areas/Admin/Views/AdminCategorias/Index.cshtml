@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MarketMaster.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+<div class="text-center">
+<h2 class="mb-4">Lista de Categorias</h2>
+</div>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> Criar Nova Categoria
+    </a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+                <tr>
+                    <td colspan="3" class="text-center">Nenhuma categoria encontrada.</td>
+                </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                        <tr>
+                            <td>@item.Nome</td>
+                            <td title="@item.Descricao">@item.Descricao.Substring(0, Math.Min(item.Descricao.Length, 50)) @(item.Descricao.Length > 50 ? "..." : "")</td>
+                            <td>
+                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm" title="Ver detalhes">
+                                    <i class="fa-solid fa-eye"></i> Detalhes
+                                </a>
+                                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-sm" title="Editar">
+                                    <i class="fa-solid fa-edit"></i> Editar
+                                </a>
+                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm" title="Excluir">
+                                    <i class="fa-solid fa-trash"></i> Excluir
+                                </a>
+                            </td>
+                        </tr>
+            }
+        }
+    </tbody>
+</table>

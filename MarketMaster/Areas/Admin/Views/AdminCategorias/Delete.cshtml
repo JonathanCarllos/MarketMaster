@@ -1,0 +1,41 @@
+﻿@model MarketMaster.Models.Categoria
+
+@{
+    ViewData["Title"] = "Excluir Categoria";
+}
+<br />
+<div class="alert alert-warning" role="alert">
+    <h3>Você tem certeza que deseja excluir esta categoria?</h3>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="mb-0">Informações da Categoria</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                <strong>Nome</strong>
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Nome
+            </dd>
+            <dt class="col-sm-3">
+                <strong>Descrição</strong>
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Descricao
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" class="mt-4">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-trash"></i> Excluir
+        </button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
