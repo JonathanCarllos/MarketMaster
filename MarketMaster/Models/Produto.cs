@@ -26,6 +26,9 @@ namespace MarketMaster.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Preco { get; set; } // Preço do produto
 
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal PrecoPromocao { get; set; } // Preço do produto
+
         [Range(0.01, double.MaxValue, ErrorMessage = "O custo deve ser maior que zero.")]
         public decimal Custo { get; set; } // Custo de aquisição
 
@@ -57,6 +60,8 @@ namespace MarketMaster.Models
         public DateTime DataDeAdicao { get; set; } = DateTime.Now; // Data de adição do produto     
 
         public bool ProdutoDestaque {  get; set; } //produto em destaque
+
+        public bool ProdutoPromocao { get; set; } //produto em destaque
 
         public int CategoriaId { get; set; } //chave estrangeira
 
