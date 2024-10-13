@@ -1,0 +1,160 @@
+﻿@model MarketMaster.Models.Produto
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+<div class="text-center">
+    <h2 class="mb-4">Atualizar Cadastro</h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Nome -->
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label">Nome do Produto</label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <!-- Descrição -->
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label">Descrição</label>
+                <textarea asp-for="Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+
+            <!-- Marca -->
+            <div class="form-group">
+                <label asp-for="Marca" class="control-label">Marca</label>
+                <input asp-for="Marca" class="form-control" />
+                <span asp-validation-for="Marca" class="text-danger"></span>
+            </div>
+
+            <!-- Modelo -->
+            <div class="form-group">
+                <label asp-for="Modelo" class="control-label">Modelo</label>
+                <input asp-for="Modelo" class="form-control" />
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+
+            <!-- Preço -->
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label">Preço</label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+
+            <!-- Preço Promoção -->
+            <div class="form-group">
+                <label asp-for="PrecoPromocao" class="control-label">Preço em Promoção</label>
+                <input asp-for="PrecoPromocao" class="form-control" />
+                <span asp-validation-for="PrecoPromocao" class="text-danger"></span>
+            </div>
+
+            <!-- Custo -->
+            <div class="form-group">
+                <label asp-for="Custo" class="control-label">Custo de Aquisição</label>
+                <input asp-for="Custo" class="form-control" />
+                <span asp-validation-for="Custo" class="text-danger"></span>
+            </div>
+
+            <!-- Quantidade em Estoque -->
+            <div class="form-group">
+                <label asp-for="QuantidadeEmEstoque" class="control-label">Quantidade em Estoque</label>
+                <input asp-for="QuantidadeEmEstoque" class="form-control" />
+                <span asp-validation-for="QuantidadeEmEstoque" class="text-danger"></span>
+            </div>
+
+            <!-- Fornecedor -->
+            <div class="form-group">
+                <label asp-for="Fornecedor" class="control-label">Fornecedor</label>
+                <input asp-for="Fornecedor" class="form-control" />
+                <span asp-validation-for="Fornecedor" class="text-danger"></span>
+            </div>
+
+            <!-- Imagem URL -->
+            <div class="form-group">
+                <label asp-for="ImagemUrl" class="control-label">URL da Imagem</label>
+                <input asp-for="ImagemUrl" class="form-control" />
+                <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Imagem Thumbnail URL -->
+            <div class="form-group">
+                <label asp-for="ImagemThumblenailUrl" class="control-label">URL da Imagem em Miniatura</label>
+                <input asp-for="ImagemThumblenailUrl" class="form-control" />
+                <span asp-validation-for="ImagemThumblenailUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Peso -->
+            <div class="form-group">
+                <label asp-for="Peso" class="control-label">Peso (kg)</label>
+                <input asp-for="Peso" class="form-control" />
+                <span asp-validation-for="Peso" class="text-danger"></span>
+            </div>
+
+            <!-- Altura -->
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label">Altura (cm)</label>
+                <input asp-for="Altura" class="form-control" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+
+            <!-- Largura -->
+            <div class="form-group">
+                <label asp-for="Largura" class="control-label">Largura (cm)</label>
+                <input asp-for="Largura" class="form-control" />
+                <span asp-validation-for="Largura" class="text-danger"></span>
+            </div>
+
+            <!-- Profundidade -->
+            <div class="form-group">
+                <label asp-for="Profundidade" class="control-label">Profundidade (cm)</label>
+                <input asp-for="Profundidade" class="form-control" />
+                <span asp-validation-for="Profundidade" class="text-danger"></span>
+            </div>
+
+            <!-- Ativo -->
+            <div class="form-group form-check">
+                <input asp-for="Ativo" class="form-check-input" type="checkbox" />
+                <label asp-for="Ativo" class="form-check-label">Produto Ativo</label>
+                <span asp-validation-for="Ativo" class="text-danger"></span>
+            </div>
+
+            <!-- Produto Destaque -->
+            <div class="form-group form-check">
+                <input asp-for="ProdutoDestaque" class="form-check-input" type="checkbox" />
+                <label asp-for="ProdutoDestaque" class="form-check-label">Produto em Destaque</label>
+                <span asp-validation-for="ProdutoDestaque" class="text-danger"></span>
+            </div>
+
+            <!-- Produto Promoção -->
+            <div class="form-group form-check">
+                <input asp-for="ProdutoPromocao" class="form-check-input" type="checkbox" />
+                <label asp-for="ProdutoPromocao" class="form-check-label">Produto em Promoção</label>
+                <span asp-validation-for="ProdutoPromocao" class="text-danger"></span>
+            </div>
+
+            <!-- Categoria -->
+            <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+            <br />
+            <!-- Botões -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

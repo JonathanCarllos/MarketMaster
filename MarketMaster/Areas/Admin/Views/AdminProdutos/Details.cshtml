@@ -1,0 +1,87 @@
+﻿@model MarketMaster.Models.Produto
+
+@{
+    ViewData["Title"] = "Detalhes do Produto";
+}
+
+<div class="text-center">
+    <h2>Detalhes do Produto</h2>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Model.Nome</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Marca</dt>
+            <dd class="col-sm-9">@Model.Marca</dd>
+
+            <dt class="col-sm-3">Modelo</dt>
+            <dd class="col-sm-9">@Model.Modelo</dd>
+
+            <dt class="col-sm-3">Descrição</dt>
+            <dd class="col-sm-9">@Model.Descricao</dd>
+
+            <dt class="col-sm-3">Preço</dt>
+            <dd class="col-sm-9">@Model.Preco.ToString("C")</dd> <!-- Valor formatado como moeda -->
+
+            <dt class="col-sm-3">Preço Promoção</dt>
+            <dd class="col-sm-9">@Model.PrecoPromocao.ToString("C")</dd>
+
+            <dt class="col-sm-3">Custo</dt>
+            <dd class="col-sm-9">@Model.Custo.ToString("C")</dd>
+
+            <dt class="col-sm-3">Quantidade em Estoque</dt>
+            <dd class="col-sm-9">@Model.QuantidadeEmEstoque</dd>
+
+            <dt class="col-sm-3">Fornecedor</dt>
+            <dd class="col-sm-9">@Model.Fornecedor</dd>
+
+            <dt class="col-sm-3">Peso</dt>
+            <dd class="col-sm-9">@Model.Peso</dd>
+
+            <dt class="col-sm-3">Dimensões (Alt x Larg x Prof)</dt>
+            <dd class="col-sm-9">@Model.Altura cm x @Model.Largura cm x @Model.Profundidade cm</dd>
+
+            <dt class="col-sm-3">Ativo</dt>
+            <dd class="col-sm-9">@Model.Ativo</dd>
+
+            <dt class="col-sm-3">Data de Adição</dt>
+            <dd class="col-sm-9">@Model.DataDeAdicao.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Produto em Destaque</dt>
+            <dd class="col-sm-9">@Model.ProdutoDestaque</dd>
+
+            <dt class="col-sm-3">Produto em Promoção</dt>
+            <dd class="col-sm-9">@Model.ProdutoPromocao</dd>
+
+            <dt class="col-sm-3">Categoria</dt>
+            <dd class="col-sm-9">@Model.Categoria?.Nome</dd>
+
+            @if (!string.IsNullOrEmpty(Model.ImagemUrl))
+            {
+                <dt class="col-sm-3">Imagem do Produto</dt>
+                <dd class="col-sm-9">
+                    <img src="@Model.ImagemUrl" alt="Imagem do produto" style="max-width: 200px;" />
+                </dd>
+            }
+        </dl>
+    </div>
+    <div class="card-footer">
+        <!-- Botão Voltar -->
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+
+        <!-- Botão Editar -->
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Editar
+        </a>
+
+        <!-- Botão Excluir -->
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+            <i class="fas fa-trash-alt"></i> Excluir
+        </a>
+    </div>
+</div>

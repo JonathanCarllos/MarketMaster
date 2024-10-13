@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MarketMaster.Models.Produto>
+
+@{
+    ViewData["Title"] = "Lista de Produtos";
+}
+
+<div class="text-center">
+    <h2>Lista de Produtos</h2>
+</div>
+<!-- Botão para criar novo produto -->
+<a asp-action="Create" class="btn btn-primary">
+    <i class="fas fa-plus"></i> Novo Produto
+</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Preço</th>
+            <th>Fornecedor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Marca</td>
+                <td>@item.Modelo</td>
+                <td>@item.Preco.ToString("C")</td> <!-- Formatação para valor monetário -->
+                <td>@item.Fornecedor</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm" title="Ver detalhes">
+                        <i class="fa-solid fa-eye"></i> Detalhes
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-sm" title="Editar">
+                        <i class="fa-solid fa-edit"></i> Editar
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm" title="Excluir">
+                        <i class="fa-solid fa-trash"></i> Excluir
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

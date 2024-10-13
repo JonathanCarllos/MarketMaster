@@ -1,0 +1,139 @@
+﻿@model MarketMaster.Models.Produto
+
+@{
+    ViewData["Title"] = "Adicionar Novo Produto";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <textarea asp-for="Descricao" class="form-control"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Marca" class="control-label"></label>
+                <input asp-for="Marca" class="form-control" />
+                <span asp-validation-for="Marca" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Modelo" class="control-label"></label>
+                <input asp-for="Modelo" class="form-control" />
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label"></label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PrecoPromocao" class="control-label"></label>
+                <input asp-for="PrecoPromocao" class="form-control" />
+                <span asp-validation-for="PrecoPromocao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Custo" class="control-label"></label>
+                <input asp-for="Custo" class="form-control" />
+                <span asp-validation-for="Custo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="QuantidadeEmEstoque" class="control-label"></label>
+                <input asp-for="QuantidadeEmEstoque" class="form-control" />
+                <span asp-validation-for="QuantidadeEmEstoque" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Fornecedor" class="control-label"></label>
+                <input asp-for="Fornecedor" class="form-control" />
+                <span asp-validation-for="Fornecedor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImagemUrl" class="control-label"></label>
+                <input asp-for="ImagemUrl" class="form-control" />
+                <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImagemThumblenailUrl" class="control-label"></label>
+                <input asp-for="ImagemThumblenailUrl" class="form-control" />
+                <span asp-validation-for="ImagemThumblenailUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Peso" class="control-label"></label>
+                <input asp-for="Peso" class="form-control" />
+                <span asp-validation-for="Peso" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label"></label>
+                <input asp-for="Altura" class="form-control" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Largura" class="control-label"></label>
+                <input asp-for="Largura" class="form-control" />
+                <span asp-validation-for="Largura" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Profundidade" class="control-label"></label>
+                <input asp-for="Profundidade" class="form-control" />
+                <span asp-validation-for="Profundidade" class="text-danger"></span>
+            </div>
+
+            <!-- Campos booleanos como Checkboxes -->
+            <div class="form-group form-check">
+                <input asp-for="Ativo" class="form-check-input" type="checkbox" />
+                <label asp-for="Ativo" class="form-check-label">Produto Ativo</label>
+                <span asp-validation-for="Ativo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <input asp-for="ProdutoDestaque" class="form-check-input" type="checkbox" />
+                <label asp-for="ProdutoDestaque" class="form-check-label">Produto em Destaque</label>
+                <span asp-validation-for="ProdutoDestaque" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <input asp-for="ProdutoPromocao" class="form-check-input" type="checkbox" />
+                <label asp-for="ProdutoPromocao" class="form-check-label">Produto em Promoção</label>
+                <span asp-validation-for="ProdutoPromocao" class="text-danger"></span>
+            </div>
+
+            <!-- Dropdown de Categorias -->
+            <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+            <br />
+            <!-- Botões -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

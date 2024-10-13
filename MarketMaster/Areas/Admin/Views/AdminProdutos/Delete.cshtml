@@ -1,0 +1,72 @@
+﻿@model MarketMaster.Models.Produto
+
+@{
+    ViewData["Title"] = "Excluir Produto";
+}
+
+<h2 class="text-danger">@ViewData["Title"]</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="mb-4">Você tem certeza que deseja excluir o seguinte produto?</h4>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label">Nome do Produto</label>
+                    <p class="form-control-static">@Model.Nome</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label">Descrição</label>
+                    <p class="form-control-static">@Model.Descricao</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Marca" class="control-label">Marca</label>
+                    <p class="form-control-static">@Model.Marca</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Modelo" class="control-label">Modelo</label>
+                    <p class="form-control-static">@Model.Modelo</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Preco" class="control-label">Preço</label>
+                    <p class="form-control-static">@Model.Preco.ToString("C")</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="QuantidadeEmEstoque" class="control-label">Quantidade em Estoque</label>
+                    <p class="form-control-static">@Model.QuantidadeEmEstoque</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Fornecedor" class="control-label">Fornecedor</label>
+                    <p class="form-control-static">@Model.Fornecedor</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ativo" class="control-label">Ativo</label>
+                    <p class="form-control-static">@Model.Ativo</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProdutoDestaque" class="control-label">Produto em Destaque</label>
+                    <p class="form-control-static">@Model.ProdutoDestaque</p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProdutoPromocao" class="control-label">Produto em Promoção</label>
+                    <p class="form-control-static">@Model.ProdutoPromocao</p>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete" method="post" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-lg">
+                    <i class="fas fa-trash"></i> Excluir
+                </button>
+                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

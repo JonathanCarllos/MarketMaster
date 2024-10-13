@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -54,11 +55,9 @@ namespace MarketMaster.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Preco = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Custo = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    QuantidadeEmEstoque = table.Column<int>(type: "int", nullable: false),
-                    UnidadeDeMedida = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    QuantidadeEmEstoque = table.Column<int>(type: "int", nullable: false),                    
                     Fornecedor = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),                    
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ImagemUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ImagemThumblenailUrl = table.Column<string>(type: "longtext", nullable: true)
@@ -68,7 +67,7 @@ namespace MarketMaster.Migrations
                     Largura = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Profundidade = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Ativo = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DataDeAdicao = table.Column<DateTime>(type: "datetime(6)", nullable: false),                   
+                    DataDeAdicao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ProdutoDestaque = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false)
                 },
