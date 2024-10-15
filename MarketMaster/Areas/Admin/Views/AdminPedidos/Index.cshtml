@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MarketMaster.Models.Pedido>
+
+@{
+    ViewBag.Title = "Lista de Pedidos";
+}
+<div class="text-center">
+    <h2 class="mb-4">Lista de Pedidos</h2>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>                       
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Total do Pedido</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>                            
+                <td>@item.Telefone</td>
+                <td>@item.Email</td>
+                <td>@item.PedidoTotal.ToString("C")</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.PedidoId })" class="btn btn-info btn-sm" title="Ver detalhes">
+                        <i class="fa-solid fa-eye"></i> Detalhes
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = item.PedidoId })" class="btn btn-warning btn-sm" title="Editar">
+                        <i class="fa-solid fa-edit"></i> Editar
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.PedidoId })" class="btn btn-danger btn-sm" title="Excluir">
+                        <i class="fa-solid fa-trash"></i> Excluir
+                    </a>
+                    <a href="@Url.Action("PedidoProdutos", new { id = item.PedidoId })" class="btn btn-primary btn-sm" title="Ver Itens">
+                        <i class="fa-solid fa-eye"></i> Ver Itens
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@model MarketMaster.Models.Pedido
+
+@{
+    ViewBag.Title = "Deletar Pedido";
+}
+<br />
+<div class="alert alert-warning" role="alert">
+    <h3 class="alert-heading">Tem certeza que deseja deletar este pedido?</h3>
+    <p>Essa ação é irreversível e apagará permanentemente os dados do pedido. Por favor, confirme sua escolha.</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h4 class="card-title">Detalhes do Pedido</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4"><i class="fas fa-user"></i> Nome Completo</dt>
+            <dd class="col-sm-8">@Model.Nome @Model.Sobrenome</dd>
+
+            <dt class="col-sm-4"><i class="fas fa-map-marker-alt"></i> Endereço</dt>
+            <dd class="col-sm-8">@Model.Endereco1</dd>
+
+            <dt class="col-sm-4"><i class="fas fa-map-pin"></i> CEP</dt>
+            <dd class="col-sm-8">@Model.Cep</dd>
+
+            <dt class="col-sm-4"><i class="fas fa-city"></i> Cidade</dt>
+            <dd class="col-sm-8">@Model.Cidade</dd>
+
+            <dt class="col-sm-4"><i class="fas fa-money-bill-wave"></i> Total do Pedido</dt>
+            <dd class="col-sm-8">@Model.PedidoTotal.ToString("C")</dd>
+        </dl>
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="PedidoId" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Excluir
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+

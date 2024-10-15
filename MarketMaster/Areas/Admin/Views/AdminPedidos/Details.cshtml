@@ -1,0 +1,55 @@
+﻿@model MarketMaster.Models.Pedido
+
+@{
+    ViewBag.Title = "Detalhes do Pedido";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Informações do Pedido</h4>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt><i class="fas fa-user"></i> Nome Completo</dt>
+                    <dd>@Model.Nome @Model.Sobrenome</dd>
+
+                    <dt><i class="fas fa-map-marker-alt"></i> Endereço</dt>
+                    <dd>@Model.Endereco1</dd>
+
+                    <dt><i class="fas fa-map-pin"></i> CEP</dt>
+                    <dd>@Model.Cep</dd>
+
+                    <dt><i class="fas fa-city"></i> Cidade</dt>
+                    <dd>@Model.Cidade</dd>
+
+                    <dt><i class="fas fa-phone"></i> Telefone</dt>
+                    <dd>@Model.Telefone</dd>
+
+                    <dt><i class="fas fa-envelope"></i> Email</dt>
+                    <dd>@Model.Email</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt><i class="fas fa-money-bill-wave"></i> Total do Pedido</dt>
+                    <dd>@Model.PedidoTotal.ToString("C")</dd>
+
+                    <dt><i class="fas fa-box"></i> Itens no Pedido</dt>
+                    <dd>@Model.TotalItensPedido</dd>
+
+                    <dt><i class="fas fa-truck"></i> Data de Envio</dt>
+                    <dd>@Model.PedidoEnviado.ToString("dd/MM/yyyy HH:mm")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="mt-4">
+    <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </a>
+</p>

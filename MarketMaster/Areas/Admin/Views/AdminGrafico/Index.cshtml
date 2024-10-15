@@ -1,0 +1,70 @@
+﻿<title>
+    @ViewData["Title"] - Gráfico de Vendas
+</title>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript">
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(CarregaDados);
+
+    function CarregaDados() {
+        $.ajax({
+            url: '@Url.Action("VendasProdutos", "AdminGrafico")',
+            data: { dias: 360 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                console.log(data); // Verifica a estrutura dos dados no console
+                if (data && data.length > 0) {
+                    GraficoVendasProdutos(data);
+                } else {
+                    console.error("Nenhum dado retornado.");
+                    toastr.error("Nenhum dado encontrado para exibir no gráfico.");
+                }
+                return false;
+            }
+        });
+        return false;
+    }
+
+    function GraficoVendasProdutos(data) {
+        var dataArray = [['Produtos', 'Quantidade', 'Valores(R$)']];
+
+        // Adiciona os dados ao array
+        $.each(data, function (i, item) {
+            // Garantir que os valores são números
+            var quantidade = parseFloat(item.produtoQuantidade) || 0; // Usar parseFloat para garantir que seja um número
+            var valorTotal = parseFloat(item.produtoValorTotal) || 0; // Usar parseFloat para garantir que seja um número
+
+            // Adiciona ao array
+            dataArray.push([item.produtoNome, quantidade, valorTotal]);
+        });
+
+        var dataTable = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+            title: 'Produtos - Vendas nos últimos 360 dias',
+            chartArea: { width: '70%' },
+            colors: ['#5202b5', '#d2a828'],
+            hAxis: { title: 'Produtos' },
+            vAxes: {
+                0: { title: 'Quantidade' }, // Eixo para quantidade
+                1: { title: 'Valor Total (em Reais)' } // Eixo para valor total
+            },
+            series: {
+                0: { targetAxisIndex: 0 }, // Quantidade
+                1: { targetAxisIndex: 1 } // Valores (R$)
+            }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(dataTable, options);
+    }
+</script>

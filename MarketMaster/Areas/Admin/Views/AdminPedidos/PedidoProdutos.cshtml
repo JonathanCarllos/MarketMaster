@@ -1,0 +1,42 @@
+﻿@model MarketMaster.ViewModels.PedidoProdutoViewModel
+
+@{
+    ViewData["Title"] = "PedidoLanches";
+    decimal totalPedido = Model.Pedido.PedidoItens.Sum(item => item.Produto.Preco * item.Quantidade);
+}
+
+<div class="text-center">
+    <h3>Itens do Pedido</h3>
+</div>
+<hr />
+
+<h3 class="h6">Pedido  : @Html.DisplayFor(model => model.Pedido.PedidoId)</h3>
+<h3 class="h6">Cliente : @Html.DisplayFor(model => model.Pedido.Nome)</h3>
+<h3 class="h6">Data    : @Html.DisplayFor(model => model.Pedido.PedidoEnviado)</h3>
+<h3 class="h6">Entrega : @Html.DisplayFor(model => model.Pedido.PedidoEntregueEm)</h3>
+
+<table class="table">
+    @foreach (var item in Model.Pedido.PedidoItens)
+    {
+        <tr>
+            <td align="right">
+                <h3 class="h6">@Html.DisplayFor(modelItem => item.Produto.Nome)</h3>
+            </td>
+            <td align="right">
+                <img src="@item.Produto.ImagemUrl" class="img-fluid" height="100" width="100" alt="Imagem do Produto">
+            </td>
+            <td align="right">
+                <h3 class="h6">@string.Format("{0:C}", item.Produto.Preco)</h3>
+            </td>
+            <td align="right">
+                <h3 class="h6">@Html.DisplayFor(modelItem => item.Quantidade)</h3>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="2">&nbsp;</td>
+        <td align="right">
+            <h3 class="h6">Total do Pedido: @string.Format("{0:C}", totalPedido)</h3>
+        </td>
+    </tr>
+</table>

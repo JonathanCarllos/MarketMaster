@@ -5,3 +5,15 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+
+$(document).ready(function () {
+    $('#tabela').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true
+    });
+});

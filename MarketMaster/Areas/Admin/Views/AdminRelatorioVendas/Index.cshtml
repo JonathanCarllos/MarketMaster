@@ -1,0 +1,32 @@
+﻿<br />
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Relatório de Pedidos por Período</h4>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" asp-action="RelatorioVendasSimples">
+                    <div class="form-group row">
+                        <label for="minDate" class="col-sm-3 col-form-label">Data Inicial</label>
+                        <div class="col-sm-9">
+                            <input type="date" name="minDate" class="form-control" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group row">
+                        <label for="maxDate" class="col-sm-3 col-form-label">Data Final</label>
+                        <div class="col-sm-9">
+                            <input type="date" name="maxDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@ namespace MarketMaster.Models
         public string? Nome { get; set; } // Nome do produto
 
         [StringLength(500)]
+        [Display(Name ="Descrição")]
         public string? Descricao { get; set; } // Descrição do produto   
 
         [StringLength(100)]
