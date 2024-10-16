@@ -1,20 +1,19 @@
 ﻿<title>
-    @ViewData["Title"] - Grafico de Vendas
+    @ViewData["Title"] - Gráfico de Vendas
 </title>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
 <script type="text/javascript">
-
     google.charts.load('current', { packages: ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(CarregaDados);
 
+    // Função para obter os dados via AJAX
     function CarregaDados() {
         $.ajax({
             url: '@Url.Action("VendasProdutos", "AdminGrafico")',
-            data: { dias: 360 },
+            data: { dias: 30 },
             dataType: "json",
             type: "GET",
             error: function (xhr, status, error) {
@@ -29,35 +28,39 @@
         return false;
     }
 
+    // Função para montar e desenhar o gráfico
     function GraficoVendas(data) {
         var dataArray = [
-            ['Produtos', 'Quantidade']
+            ['Produto', 'Quantidade']
         ];
 
+        // Preenche o array com os dados recebidos via AJAX
         $.each(data, function (i, item) {
-            // Verifica se a quantidade é válida e garante que seja numérica
             var quantidade = item.produtoQuantidade ? Number(item.produtoQuantidade) : 0;
-
-            // Adiciona os dados ao array
             dataArray.push([item.produtoNome, quantidade]);
         });
 
-        // Converte o array para DataTable do Google Charts
+        // Converte o array para o formato de DataTable do Google Charts
         var dataTable = google.visualization.arrayToDataTable(dataArray);
 
-        // Define as opções do gráfico
+        // Configurações do gráfico
         var options = {
-            title: 'Produtos - Quantidade vendida nos últimos 360 dias',
+            title: 'Vendas de Produtos nos últimos 30 dias',
+            animation: {
+                duration: 1500,
+                easing: 'out',
+                startup: true
+            },
             chartArea: {
                 width: '70%'
             },
             colors: ['#5202b5'],
             hAxis: {
-                title: 'Quantidade vendida',
-                minValue: 0
+                title: 'Produtos'
             },
             vAxis: {
-                title: 'Produtos'
+                title: 'Quantidade Vendida',
+                minValue: 0
             }
         };
 

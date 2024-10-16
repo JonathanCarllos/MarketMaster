@@ -1,2 +1,105 @@
 ﻿<br />
 <h3><i class="fa-solid fa-house"></i>&nbsp;Dashboard</h3>
+<br />
+<div class="text-center">
+    <h4>Vendas Semanal</h4>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(CarregaDados);
+
+        // Função para obter os dados via AJAX
+        function CarregaDados() {
+            $.ajax({
+                url: '@Url.Action("VendasProdutos", "AdminGrafico")',
+                data: { dias: 30 },
+                dataType: "json",
+                type: "GET",
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    toastr.error(err.message);
+                },
+                success: function (data) {
+                    GraficoVendas(data);
+                    return false;
+                }
+            });
+            return false;
+        }
+
+        // Função para montar e desenhar o gráfico
+        function GraficoVendas(data) {
+            var dataArray = [
+                ['Produto', 'Quantidade']
+            ];
+
+            // Preenche o array com os dados recebidos via AJAX
+            $.each(data, function (i, item) {
+                var quantidade = item.produtoQuantidade ? Number(item.produtoQuantidade) : 0;
+                dataArray.push([item.produtoNome, quantidade]);
+            });
+
+            // Converte o array para o formato de DataTable do Google Charts
+            var dataTable = google.visualization.arrayToDataTable(dataArray);
+
+            // Configurações do gráfico
+            var options = {
+                title: 'Vendas de Produtos nos últimos 30 dias',
+                animation: {
+                    duration: 1500,
+                    easing: 'out',
+                    startup: true
+                },
+                chartArea: {
+                    width: '70%'
+                },
+                colors: ['#5202b5'],
+                hAxis: {
+                    title: 'Produtos'
+                },
+                vAxis: {
+                    title: 'Quantidade Vendida',
+                    minValue: 0
+                }
+            };
+
+            // Desenha o gráfico de colunas
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(dataTable, options);
+        }
+    </script>
+
+
+</div>
+<br />
+<hr />
+<br />
+<div class="text-center">
+    <h3>Lista de Produtos</h3>
+</div>
+<table class="table table-striped" id="datatablesSimple">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Preço</th>
+            <th>Fornecedor</th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Marca</td>
+                <td>@item.Modelo</td>
+                <td>@item.Preco.ToString("C")</td> <!-- Formatação para valor monetário -->
+                <td>@item.Fornecedor</td>              
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,5 +1,5 @@
 ﻿<title>
-    @ViewData["Title"] - Grafico de Vendas
+    @ViewData["Title"] - Gráfico de Vendas
 </title>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -7,14 +7,14 @@
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
 <script type="text/javascript">
-
-    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.load('current', { packages: ['corechart'] });
     google.charts.setOnLoadCallback(CarregaDados);
 
+    // Função para carregar os dados via AJAX
     function CarregaDados() {
         $.ajax({
             url: '@Url.Action("VendasProdutos", "AdminGrafico")',
-            data: { dias: 360 },
+            data: { dias: 7 },
             dataType: "json",
             type: "GET",
             error: function (xhr, status, error) {
@@ -22,46 +22,52 @@
                 toastr.error(err.message);
             },
             success: function (data) {
-                GraficoVendas(data);
+                GraficoVendasLanches(data);
                 return false;
             }
         });
         return false;
     }
 
-    function GraficoVendas(data) {
+    // Função para montar o gráfico de barras
+    function GraficoVendasLanches(data) {
         var dataArray = [
             ['Produtos', 'Quantidade']
         ];
 
         $.each(data, function (i, item) {
-            // Verifica se a quantidade é válida e garante que seja numérica
+            // Garantir que a quantidade seja numérica
             var quantidade = item.produtoQuantidade ? Number(item.produtoQuantidade) : 0;
 
-            // Adiciona os dados ao array
-            dataArray.push([item.produtoNome, quantidade]);
+            // Adicionar os dados no array
+            dataArray.push([item.lancheNome, quantidade]);
         });
 
-        // Converte o array para DataTable do Google Charts
+        // Converter o array para DataTable do Google Charts
         var dataTable = google.visualization.arrayToDataTable(dataArray);
 
-        // Define as opções do gráfico
+        // Configurações do gráfico
         var options = {
-            title: 'Produtos - Quantidade vendida nos últimos 360 dias',
+            title: 'Quantidade de Produtos Vendidos nos Últimos 7 Dias',
             chartArea: {
                 width: '70%'
             },
-            colors: ['#5202b5'],
+            colors: ['#5202b5'], // Cor da barra
             hAxis: {
-                title: 'Quantidade vendida',
-                minValue: 0
+                title: 'Quantidade'
+              
             },
             vAxis: {
                 title: 'Produtos'
+            },
+            animation: {
+                duration: 1500,
+                easing: 'inAndOut',
+                startup: true
             }
         };
 
-        // Desenha o gráfico de colunas
+        // Desenha o gráfico de barras
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(dataTable, options);
     }

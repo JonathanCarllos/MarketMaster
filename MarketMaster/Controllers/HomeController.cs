@@ -23,6 +23,7 @@ namespace MarketMaster.Controllers
                 ProdutoSelecionados = _produtoRepository.ProdutosFavoritos
             };
 
+
             return View(homeViewModel);
         }
       
